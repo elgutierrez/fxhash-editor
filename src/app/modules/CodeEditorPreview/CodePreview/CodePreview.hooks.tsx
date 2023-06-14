@@ -3,14 +3,14 @@ import { useState, useCallback, useEffect, useMemo } from 'react';
 import { getPreviewHtml } from '@/app/modules/CodeEditorPreview/CodePreview/CodePreview.utils';
 
 export function useCodePreview(script: string, debounceRender: number) {
-	const [previewHtml, setPreviewHtml] = useState('');
+	const [previewHtml, setPreviewHtml] = useState<string | undefined>();
 	const [loading, setLoading] = useState(false);
 
 	const debouncedRenderHtml = useMemo(
 		() =>
 			debounce((code?: string) => {
 				if (!code) {
-					setPreviewHtml('');
+					setPreviewHtml(undefined);
 					return;
 				}
 				if (!loading) setLoading(true);
@@ -22,7 +22,7 @@ export function useCodePreview(script: string, debounceRender: number) {
 
 	useEffect(() => {
 		debouncedRenderHtml(script);
-	}, [debouncedRenderHtml, script]);
+	}, [script]);
 
 	return {
 		previewHtml,
