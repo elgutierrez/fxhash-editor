@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { useCodePreview } from './CodePreview.hooks';
+import { useCodePreview } from '@/app/modules/CodeEditorPreview/CodePreview/CodePreview.hooks';
 
 type Props = {
 	value: string;

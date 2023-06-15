@@ -1,11 +1,10 @@
 'use client';
 
-import { useCallback, useState } from 'react';
 import classNames from 'classnames';
+import { useCallback, useState } from 'react';
 import { CodeEditor } from '@/app/modules/CodeEditorPreview/CodeEditor/CodeEditor.component';
 import { CodePreview } from '@/app/modules/CodeEditorPreview/CodePreview/CodePreview.component';
-import { getPreviewHtml } from '@/app/modules/CodeEditorPreview/CodePreview/CodePreview.utils';
-import { useCodePublish as useCodeExport } from '@/app/modules/CodeEditorPreview/CodeEditor/CodeEditor.hooks';
+import { useCodeExport } from './modules/CodeEditorPreview/CodePreview/CodePreview.hooks';
 
 export default function CodeEditorPreview() {
 	const [script, setScript] = useState('');
@@ -15,8 +14,9 @@ export default function CodeEditorPreview() {
 		(value?: string) => setScript(value ?? ''),
 		[]
 	);
+
 	const handlePublishClick = useCallback(
-		() => exportZipAndDownload(getPreviewHtml(script)),
+		() => exportZipAndDownload(script),
 		[script, exportZipAndDownload]
 	);
 
